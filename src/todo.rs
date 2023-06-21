@@ -5,12 +5,12 @@ use leptos_meta::*;
 use leptos_router::*;
 use serde::{Deserialize, Serialize};
 
-use crate::db_mongo::load_database;
-
 cfg_if! {
     if #[cfg(feature = "ssr")] {
         use sqlx::{Connection, SqliteConnection};
         use mongodb::{Database};
+
+        use todo_app_sqlite::db_mongo::load_database;
 
         pub async fn db() -> Result<SqliteConnection, ServerFnError> {
             SqliteConnection::connect("sqlite:Todos.db").await.map_err(|e| ServerFnError::ServerError(e.to_string()))
