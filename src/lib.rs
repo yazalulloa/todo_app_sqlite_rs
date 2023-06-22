@@ -1,6 +1,6 @@
 use cfg_if::cfg_if;
 #[cfg(feature = "ssr")]
-pub mod db_mongo;
+pub mod persistence;
 pub mod todo;
 
 // Needs to be in lib.rs AFAIK because wasm-bindgen needs us to be compiling a lib. I may be wrong.

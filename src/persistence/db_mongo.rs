@@ -3,6 +3,10 @@ use mongodb::options::ClientOptions;
 use mongodb::{Client, Collection, Database};
 use std::fmt::Error;
 
+pub fn db_t_func() {
+    print!("shit")
+}
+
 pub async fn load_database() -> Result<Database, Error> {
     let url = std::env::var("MONGO_URL")
         .ok()
