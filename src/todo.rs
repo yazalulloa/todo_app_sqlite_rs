@@ -3,9 +3,8 @@ use futures::TryStreamExt;
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
-use serde::{Deserialize, Serialize};
 
-mod persistence;
+use crate::persistence::db_mongo::Todo;
 
 cfg_if! {
     if #[cfg(feature = "ssr")] {
@@ -19,25 +18,20 @@ cfg_if! {
             SqliteConnection::connect("sqlite:Todos.db").await.map_err(|e| ServerFnError::ServerError(e.to_string()))
         }
 
-        #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, sqlx::FromRow)]
-        pub struct Todo {
-            id: u16,
-            title: String,
-            completed: bool,
-        }
+
 
         pub async fn mongo() -> Result<Database, ServerFnError> {
-            
+
             load_database().await.map_err(|e| ServerFnError::ServerError(e.to_string()))
         }
-    } else {
+    } /*else {
         #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
         pub struct Todo {
             id: u16,
             title: String,
             completed: bool,
         }
-    }
+    }*/
 }
 
 #[server(GetTodos, "/api")]

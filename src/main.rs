@@ -2,7 +2,9 @@ use cfg_if::cfg_if;
 use dotenv::dotenv;
 use leptos::*;
 
-mod todo;
+#[cfg(feature = "ssr")]
+pub mod persistence;
+pub mod todo;
 
 // boilerplate to run in different modes
 cfg_if! {
@@ -11,6 +13,7 @@ cfg_if! {
         use actix_files::{Files};
         use actix_web::*;
         use crate::todo::*;
+        use todo_app_sqlite::persistence::*;
         use leptos_actix::{generate_route_list, LeptosRoutes};
 
         #[get("/style.css")]
