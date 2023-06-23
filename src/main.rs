@@ -5,7 +5,7 @@ use leptos::*;
 #[cfg(feature = "ssr")]
 pub mod persistence;
 pub mod todo;
-
+pub mod models;
 // boilerplate to run in different modes
 cfg_if! {
     // server-only stuff

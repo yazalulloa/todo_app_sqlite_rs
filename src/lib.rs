@@ -1,4 +1,5 @@
 use cfg_if::cfg_if;
+pub mod models;
 #[cfg(feature = "ssr")]
 pub mod persistence;
 pub mod todo;

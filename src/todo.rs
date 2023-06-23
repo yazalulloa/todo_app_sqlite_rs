@@ -4,7 +4,7 @@ use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
 
-use crate::persistence::db_mongo::Todo;
+use crate::models::models::Todo;
 
 cfg_if! {
     if #[cfg(feature = "ssr")] {
@@ -18,13 +18,11 @@ cfg_if! {
             SqliteConnection::connect("sqlite:Todos.db").await.map_err(|e| ServerFnError::ServerError(e.to_string()))
         }
 
-
-
         pub async fn mongo() -> Result<Database, ServerFnError> {
 
             load_database().await.map_err(|e| ServerFnError::ServerError(e.to_string()))
         }
-    } /*else {
+    }/* else {
         #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
         pub struct Todo {
             id: u16,

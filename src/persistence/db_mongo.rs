@@ -3,7 +3,6 @@ use std::fmt::Error;
 use mongodb::bson::Document;
 use mongodb::options::ClientOptions;
 use mongodb::{Client, Collection, Database};
-use serde::{Deserialize, Serialize};
 
 pub async fn load_database() -> Result<Database, Error> {
     let url = std::env::var("MONGO_URL")
@@ -18,9 +17,4 @@ pub async fn collection(col_name: &str) -> Collection<Document> {
     load_database().await.expect("").collection(col_name)
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, sqlx::FromRow)]
-pub struct Todo {
-    pub id: u16,
-    pub title: String,
-    pub completed: bool,
-}
+
